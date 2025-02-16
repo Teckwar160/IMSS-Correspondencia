@@ -58,7 +58,6 @@ sudo add-apt-repository ppa:ondrej/php -y
 ```
 ```
 sudo apt update
-
 ```
 
 
