@@ -316,7 +316,7 @@
                     </div>
                     <div class="col-md-1 text-center">
                         <button type="button" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-search" id="papeleta"></i>
+                            <i class="bi bi-search" id="buscar"></i>
                         </button>
                     </div>
                     <div class="col-md-1 text-center">

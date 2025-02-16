@@ -613,6 +613,113 @@ function actualizarFormulario(indice) {
   );
 }
 
+// Función para actualizar el formulario con búsquedas
+function actualizarFormularioBusqueda(indice) {
+  $.post(
+    "../controller/registros.php",
+    { accion: "obtenerRegistro", indice: indice },
+    function (res) {
+      if (res) {
+        // Actualiza los campos con los datos del registro
+        $("#FOLIO_DIISE").val(res.FOLIO_DIISE);
+        $("#FECHA_CARGA").val(res.FECHA_CARGA);
+        $("#EXPEDIENTE").val(res.EXPEDIENTE);
+        $("#LEGAJO").val(res.LEGAJO);
+        $("#TIPO_FOLIO").val(res.TIPO_FOLIO);
+        $("#CATEGORIA").val(res.CATEGORIA);
+        $("#TURNADO").val(res.TURNADO);
+        $("#COPIA_A").val(res.COPIA_A);
+        $("#REQUIERE_RESPUESTA").val(res.REQUIERE_RESPUESTA);
+        $("#OBSERVACION_FOLIO").val(res.OBSERVACION_FOLIO);
+        $("#OBSERVACION_RESPUESTA").val(res.OBSERVACION_RESPUESTA);
+        $("#ESTATUS_FOLIO").val(res.ESTATUS_FOLIO);
+        $("#FECHA_LIMITE_RESPUESTA").val(res.FECHA_LIMITE_RESPUESTA);
+        $("#FECHA_CONCLUSION_FOLIO").val(res.FECHA_CONCLUSION_FOLIO);
+        $("#ID_COEES").val(res.ID_COEES.replace("_2024", ""));
+        $("#FECHA_RECEPCION").val(res.FECHA_RECEPCION);
+        $("#FOLIOS_RELACIONADOS").val(res.FOLIOS_RELACIONADOS);
+        $("#TIPO").val(res.TIPO);
+        $("#FUENTE").val(res.FUENTE);
+        $("#NUMERO").val(res.NUMERO);
+        $("#AREA_REMITENTE").val(res.AREA_REMITENTE);
+        $("#ASUNTO").val(res.ASUNTO);
+        $("#FECHA_RESPUESTA_1").val(res.FECHA_RESPUESTA_1);
+        $("#TIPO_RESPUESTA_1").val(res.TIPO_RESPUESTA_1);
+        $("#NUMERO_RESPUESTA_1").val(res.NUMERO_RESPUESTA_1);
+        $("#FECHA_RESPUESTA_2").val(res.FECHA_RESPUESTA_2);
+        $("#TIPO_RESPUESTA_2").val(res.TIPO_RESPUESTA_2);
+        $("#NUMERO_RESPUESTA_2").val(res.NUMERO_RESPUESTA_2);
+        $("#FECHA_RESPUESTA_3").val(res.FECHA_RESPUESTA_3);
+        $("#TIPO_RESPUESTA_3").val(res.TIPO_RESPUESTA_3);
+        $("#NUMERO_RESPUESTA_3").val(res.NUMERO_RESPUESTA_3);
+        $("#FECHA_RESPUESTA_4").val(res.FECHA_RESPUESTA_4);
+        $("#TIPO_RESPUESTA_4").val(res.TIPO_RESPUESTA_4);
+        $("#NUMERO_RESPUESTA_4").val(res.NUMERO_RESPUESTA_4);
+        $("#FECHA_RESPUESTA_5").val(res.FECHA_RESPUESTA_5);
+        $("#TIPO_RESPUESTA_5").val(res.TIPO_RESPUESTA_5);
+        $("#NUMERO_RESPUESTA_5").val(res.NUMERO_RESPUESTA_5);
+        $("#FECHA_RESPUESTA_6").val(res.FECHA_RESPUESTA_6);
+        $("#TIPO_RESPUESTA_6").val(res.TIPO_RESPUESTA_6);
+        $("#NUMERO_RESPUESTA_6").val(res.NUMERO_RESPUESTA_6);
+
+        // Mensaje de éxito
+        Swal.fire({
+          title: "Búsqueda exitosa",
+          text: "El formulario se actualizó correctamente",
+          icon: "success",
+        });
+
+        // Deshabilitar botones según la lógica
+        $("input, select, textarea").prop("disabled", true);
+        $("#FOLIO_DIISE").prop("disabled", false);
+      } else {
+        // Mensaje de error si la respuesta es vacía o nula
+        Swal.fire({
+          title: "Búsqueda fallida",
+          text: "No se encontró el folio DIISE",
+          icon: "error",
+        });
+      }
+    },
+    "json"
+  ).fail(function () {
+    // Mensaje de error si hay un problema con la petición AJAX
+    Swal.fire({
+      title: "Error",
+      text: "Hubo un problema con la búsqueda. Inténtelo nuevamente.",
+      icon: "error",
+    });
+  });
+}
+
+// Botón "Buscar"
+$("#buscar").click(function () {
+  Swal.fire({
+    title: "Ingrese el folio DIISE",
+    input: "number",
+    inputPlaceholder: "Ejemplo: "+totalRegistros,
+    showCancelButton: true,
+    confirmButtonText: "Buscar",
+    cancelButtonText: "Cancelar",
+    inputValidator: (value) => {
+      if (!value) {
+        return "Debe ingresar un número";
+      }
+      if (isNaN(value) || value <= 0 || value > totalRegistros) {
+        return "Ingrese un número válido dentro del rango";
+      }
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let indiceBuscar = parseInt(result.value, 10) -1;
+
+      if (indiceBuscar >= 0 && indiceBuscar < totalRegistros) {
+        actualizarFormularioBusqueda(indiceBuscar);
+      }
+    }
+  });
+});
+
 // Botón "Atrás"
 $("#atras").click(function () {
   if (indiceActual > 0) {
