@@ -1,0 +1,45 @@
+.main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f2f6fc;
+}
+
+.cards {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    background-color: #ffffff;
+}
+
+.cards-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-titles {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.btn-filtro {
+    width: 100%;
+    font-size: 14px;
+}
+
+input, select, .btn-filtro {
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+    .col-lg-2, .col-lg-3, .col-lg-4 {
+        flex-basis: 100%;
+    }
+}
