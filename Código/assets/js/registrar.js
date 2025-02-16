@@ -714,6 +714,7 @@ $("#buscar").click(function () {
       let indiceBuscar = parseInt(result.value, 10) -1;
 
       if (indiceBuscar >= 0 && indiceBuscar < totalRegistros) {
+        indiceActual = indiceBuscar;
         actualizarFormularioBusqueda(indiceBuscar);
       }
     }
