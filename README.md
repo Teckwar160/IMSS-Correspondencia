@@ -54,7 +54,7 @@ apt install php-mysqli
 
 ### 8. Descargar el código fuente del repositorio
 ```bash
-git clone "repo"
+git clone https://github.com/Teckwar160/IMSS-Correspondencia.git
 ```
 
 ### 9. Crear la base de datos del aplicativo
